@@ -13,7 +13,6 @@ function MeetupItem(props) {
       favoriteContext.removeFavorite(props.id);
     } else {
       
-      console.log("ID:" + props.id);
         favoriteContext.addFavorite({
             id: props.id,
             title: props.title,

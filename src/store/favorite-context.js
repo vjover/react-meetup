@@ -14,7 +14,6 @@ export function FavoritesContextProvider (props) {
     const [userFavorites, setUserFavorites] = useState([]);
 
     function addFavoriteHandler(favoriteMeetup) {
-        console.log('Hello')
         setUserFavorites((prevUserFavorite) => {
             return prevUserFavorite.concat(favoriteMeetup);
         });
