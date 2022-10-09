@@ -5,6 +5,7 @@ import FavoritesContext from '../../store/favorite-context';
 
 export default function MainNavigation() {
   const favoriteContext = useContext(FavoritesContext)
+  
   return (
     <header className={classes.header} data-test="navigation-header">
       <div className={classes.logo}>React Meetups</div>
