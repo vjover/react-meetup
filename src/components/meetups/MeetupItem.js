@@ -1,31 +1,55 @@
-import { useFetch } from "./../../util-hooks/useFetch";
 import classes from "./MeetupItem.module.css";
 import Card from "../ui/Card";
+import {useContext} from 'react';
+import FavoritesContext from '../../store/favorite-context';
 
-export default function MeetupItem() {
-  const { data } = useFetch({
-    url: "/data.json",
-  });
+function MeetupItem(props) {
+  const favoriteContext = useContext(FavoritesContext);
+  const isItemFavorite = favoriteContext.itemIsFavorite(props.id);
 
-  if (!data) return <p>Loading...</p>;
-  let [item] = data;
-
-  return (
-    <li  className={classes.item} data-test='meet-up-item'>
-      <Card>
-        <div className={classes.image}>
-          
-          <img src={item.image} alt={item.title} />
-        </div>
-        <div className={classes.content}>
-          <h3>{item.title}</h3>
-          <address>{item.address}</address>
-          <p>{item.description}</p>
-        </div>
-        <div className={classes.actions}>
-          <button>Add to favorites</button>
-        </div>
-      </Card>
-    </li>
-  );
+  function toggleFavoriteStatusHandler() {
+    
+    if(isItemFavorite) {
+      favoriteContext.removeFavorite(props.id);
+    } else {
+      
+      console.log("ID:" + props.id);
+        favoriteContext.addFavorite({
+            id: props.id,
+            title: props.title,
+            image: props.image,
+            address: props.address,
+            description: props.description
+           
+        });
+    }
 }
+
+
+
+return (
+  <li  className={classes.item}>
+    <Card>
+      <div className={classes.image}>
+        
+        <img src={props.image} alt={props.title} />
+      </div>
+      <div className={classes.content}>
+        <h3>{props.title}</h3>
+        <address>{props.address}</address>
+        <p>{props.description}</p>
+      </div>
+      <div className={classes.actions}>
+        <button 
+        onClick=
+        {toggleFavoriteStatusHandler}>{isItemFavorite?'Remove From Favorites': 'Add to Favorites'}</button>
+        
+      </div>
+    </Card>
+  </li>
+);
+
+
+}
+
+export default MeetupItem;

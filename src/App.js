@@ -8,15 +8,17 @@ import {
 import AllMeetupsPage from "./pages/AllMeetupsPage";
 import FavoritesPage from "./pages/Favorites";
 import NewMeetupsPage from "./pages/NewMeetup";
-
 import Layout from "./components/layout/Layout";
+import MainNavigation from './components/layout/MainNavigation.js';
 
 
 
 function App() {
   return (
+    
+    <BrowserRouter>
+    <MainNavigation />
     <Layout>
-      <BrowserRouter>
       <Routes>
         <Route exact path='/' element={ <AllMeetupsPage />}>
           
@@ -28,8 +30,10 @@ function App() {
          
         </Route>
       </Routes>
+      </Layout>
       </BrowserRouter>
-    </Layout>
+      
+    
   );
 }
 
